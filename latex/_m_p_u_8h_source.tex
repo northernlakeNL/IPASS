@@ -1,0 +1,144 @@
+\hypertarget{_m_p_u_8h_source}{}\doxysection{MPU.\+h}
+\mbox{\hyperlink{_m_p_u_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#ifndef MPU6050\_H}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define MPU6050\_H}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}hwlib.hpp"{}}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{class_mpu6050}{Mpu6050}} \{}
+\DoxyCodeLine{31 \textcolor{keyword}{private}:}
+\DoxyCodeLine{32     hwlib::i2c\_bus \&bus;}
+\DoxyCodeLine{33     uint8\_t address = 0x68;}
+\DoxyCodeLine{34     uint8\_t PWR\_mgmt1 = 0x6B;}
+\DoxyCodeLine{35     uint8\_t PWR\_mgmt2 = 0x6C;}
+\DoxyCodeLine{36     uint8\_t AccXoutH = 0x3B;}
+\DoxyCodeLine{37     uint8\_t AccYoutH = 0x3D;}
+\DoxyCodeLine{38     uint8\_t AccZoutH = 0x3F;}
+\DoxyCodeLine{39     uint8\_t TempH = 0x41;}
+\DoxyCodeLine{40     uint8\_t GyrXoutH = 0x43;}
+\DoxyCodeLine{41     uint8\_t GyrYoutH = 0x45;}
+\DoxyCodeLine{42     uint8\_t GyrZoutH = 0x47;}
+\DoxyCodeLine{43     uint8\_t AccConf = 0x1C;}
+\DoxyCodeLine{44     uint8\_t GyroConf = 0x1B;}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{public}:}
+\DoxyCodeLine{47     \mbox{\hyperlink{class_mpu6050}{Mpu6050}}(hwlib::i2c\_bus \&bus) :}
+\DoxyCodeLine{48             bus(bus) \{\}}
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_mpu6050_adb5debbfea5cb00aab9e1f6aae3ffbef}{startup}}() \{}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56         uint8\_t nosleep2 = 128;}
+\DoxyCodeLine{57         uint8\_t nosleep1 = 0b00000000;}
+\DoxyCodeLine{58         uint8\_t AccConfig = 0b000000;}
+\DoxyCodeLine{59         uint8\_t GyroConfig = 0b0001000;}
+\DoxyCodeLine{61         \{hwlib::i2c\_write\_transaction power\_wtrans = bus.write(address);}
+\DoxyCodeLine{62             power\_wtrans.write(PWR\_mgmt1);}
+\DoxyCodeLine{63             power\_wtrans.write(nosleep1);}
+\DoxyCodeLine{64         \}}
+\DoxyCodeLine{66         \{hwlib::i2c\_write\_transaction power\_wtrans = bus.write(address);}
+\DoxyCodeLine{67             power\_wtrans.write(PWR\_mgmt2);}
+\DoxyCodeLine{68             power\_wtrans.write(nosleep2);}
+\DoxyCodeLine{69         \}}
+\DoxyCodeLine{71         \{hwlib::i2c\_write\_transaction power\_wtrans = bus.write(address);}
+\DoxyCodeLine{72             power\_wtrans.write(AccConf);}
+\DoxyCodeLine{73             power\_wtrans.write(AccConfig);}
+\DoxyCodeLine{74         \}}
+\DoxyCodeLine{76         \{hwlib::i2c\_write\_transaction power\_wtrans = bus.write(address);}
+\DoxyCodeLine{77             power\_wtrans.write(GyroConf);}
+\DoxyCodeLine{78             power\_wtrans.write(GyroConfig);}
+\DoxyCodeLine{79         \}}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83     int16\_t \mbox{\hyperlink{class_mpu6050_a1a6e1731847584b8136be033bfeae8ca}{getTemp}}()\{}
+\DoxyCodeLine{84         uint8\_t Temp\_Result[2];}
+\DoxyCodeLine{85         int16\_t raw\_temp = 0;}
+\DoxyCodeLine{86         \{hwlib::i2c\_write\_transaction accx\_wtrans = bus.write(address);}
+\DoxyCodeLine{87             accx\_wtrans.write(TempH);}
+\DoxyCodeLine{88         \}}
+\DoxyCodeLine{89         \{hwlib::i2c\_read\_transaction accx\_rtrans = bus.read(address);}
+\DoxyCodeLine{90             accx\_rtrans.read(Temp\_Result, 2);}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92         raw\_temp = (int16\_t)((Temp\_Result[0] << 8) | Temp\_Result[1]);}
+\DoxyCodeLine{93         \textcolor{keywordflow}{return} raw\_temp;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{96     int16\_t \mbox{\hyperlink{class_mpu6050_ad89ea5c7f3c895d6022acccaa1718eb1}{getAccX}}() \{}
+\DoxyCodeLine{97         uint8\_t accX\_result[2];}
+\DoxyCodeLine{98         int16\_t raw\_acc\_x = 0;}
+\DoxyCodeLine{99         \{hwlib::i2c\_write\_transaction accx\_wtrans = bus.write(address);}
+\DoxyCodeLine{100             accx\_wtrans.write(AccXoutH);}
+\DoxyCodeLine{101         \}}
+\DoxyCodeLine{102         \{hwlib::i2c\_read\_transaction accx\_rtrans = bus.read(address);}
+\DoxyCodeLine{103             accx\_rtrans.read(accX\_result, 2);}
+\DoxyCodeLine{104         \}}
+\DoxyCodeLine{105         raw\_acc\_x = (int16\_t)((accX\_result[0] << 8) | accX\_result[1]);}
+\DoxyCodeLine{106         \textcolor{keywordflow}{return} raw\_acc\_x;}
+\DoxyCodeLine{107     \};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{110     int16\_t \mbox{\hyperlink{class_mpu6050_a9c2d3c3e830296ce76985efb3e8dea49}{getAccY}}() \{}
+\DoxyCodeLine{111         uint8\_t accY\_result[2];}
+\DoxyCodeLine{112         int16\_t raw\_acc\_y = 0;}
+\DoxyCodeLine{113         \{hwlib::i2c\_write\_transaction accy\_wtrans = bus.write(address);}
+\DoxyCodeLine{114             accy\_wtrans.write(AccYoutH);}
+\DoxyCodeLine{115         \}}
+\DoxyCodeLine{116         \{hwlib::i2c\_read\_transaction accy\_rtrans = bus.read(address);}
+\DoxyCodeLine{117             accy\_rtrans.read(accY\_result, 2);}
+\DoxyCodeLine{118         \}}
+\DoxyCodeLine{119         raw\_acc\_y = (int16\_t)((accY\_result[0] << 8) | accY\_result[1]);}
+\DoxyCodeLine{120         \textcolor{keywordflow}{return} raw\_acc\_y;}
+\DoxyCodeLine{121     \};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{124     int16\_t \mbox{\hyperlink{class_mpu6050_af63c07e92a289d3a06739785371b3257}{getAccZ}}() \{}
+\DoxyCodeLine{125         uint8\_t accZ\_result[2];}
+\DoxyCodeLine{126         int16\_t raw\_acc\_z = 0;}
+\DoxyCodeLine{127         \{hwlib::i2c\_write\_transaction accz\_wtrans = bus.write(address);}
+\DoxyCodeLine{128             accz\_wtrans.write(AccZoutH);}
+\DoxyCodeLine{129         \}}
+\DoxyCodeLine{130         \{hwlib::i2c\_read\_transaction accz\_rtrans = bus.read(address);}
+\DoxyCodeLine{131             accz\_rtrans.read(accZ\_result, 2);}
+\DoxyCodeLine{132         \}}
+\DoxyCodeLine{133         raw\_acc\_z = (int16\_t)((accZ\_result[0] << 8) | accZ\_result[1]);}
+\DoxyCodeLine{134         \textcolor{keywordflow}{return} raw\_acc\_z;}
+\DoxyCodeLine{135     \};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{139     int16\_t \mbox{\hyperlink{class_mpu6050_a2aedc4a704c79d20b3175298ad1bb838}{getGyroX}}() \{}
+\DoxyCodeLine{140         uint8\_t gyroX\_result[2];}
+\DoxyCodeLine{141         int16\_t raw\_gyro\_x = 0;}
+\DoxyCodeLine{142         \{hwlib::i2c\_write\_transaction gyrox\_wtrans = bus.write(address);}
+\DoxyCodeLine{143             gyrox\_wtrans.write(GyrXoutH);}
+\DoxyCodeLine{144         \}}
+\DoxyCodeLine{145         \{hwlib::i2c\_read\_transaction gyrox\_rtrans = bus.read(address);}
+\DoxyCodeLine{146             gyrox\_rtrans.read(gyroX\_result, 2);}
+\DoxyCodeLine{147         \}}
+\DoxyCodeLine{148         raw\_gyro\_x = (int16\_t)((gyroX\_result[0] << 8) | gyroX\_result[1]);}
+\DoxyCodeLine{149         \textcolor{keywordflow}{return} raw\_gyro\_x;}
+\DoxyCodeLine{150     \};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{153     int16\_t \mbox{\hyperlink{class_mpu6050_aad125508badfb10e0fa30dcbfcaccb49}{getGyroY}}() \{}
+\DoxyCodeLine{154         uint8\_t gyroY\_result[2];}
+\DoxyCodeLine{155         int16\_t raw\_gyro\_y = 0;}
+\DoxyCodeLine{156         \{hwlib::i2c\_write\_transaction gyroy\_wtrans = bus.write(address);}
+\DoxyCodeLine{157             gyroy\_wtrans.write(GyrYoutH);}
+\DoxyCodeLine{158         \}}
+\DoxyCodeLine{159         \{hwlib::i2c\_read\_transaction gyroy\_rtrans = bus.read(address);}
+\DoxyCodeLine{160             gyroy\_rtrans.read(gyroY\_result, 2);}
+\DoxyCodeLine{161         \}}
+\DoxyCodeLine{162         raw\_gyro\_y = (int16\_t)((gyroY\_result[0] << 8) | gyroY\_result[1]);}
+\DoxyCodeLine{163         \textcolor{keywordflow}{return} raw\_gyro\_y;}
+\DoxyCodeLine{164     \};}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{167     int16\_t \mbox{\hyperlink{class_mpu6050_ab1877b254f3395aaa93534f5d5e2c1fb}{getGyroZ}}() \{}
+\DoxyCodeLine{168         uint8\_t gyroZ\_result[2];}
+\DoxyCodeLine{169         int16\_t raw\_gyro\_z = 0;}
+\DoxyCodeLine{170         \{hwlib::i2c\_write\_transaction gyroz\_wtrans = bus.write(address);}
+\DoxyCodeLine{171             gyroz\_wtrans.write(GyrZoutH);}
+\DoxyCodeLine{172         \}}
+\DoxyCodeLine{173         \{hwlib::i2c\_read\_transaction gyroz\_rtrans = bus.read(address);}
+\DoxyCodeLine{174             gyroz\_rtrans.read(gyroZ\_result, 2);}
+\DoxyCodeLine{175         \}}
+\DoxyCodeLine{176         raw\_gyro\_z = (int16\_t)((gyroZ\_result[0] << 8) | gyroZ\_result[1]);}
+\DoxyCodeLine{177         \textcolor{keywordflow}{return} raw\_gyro\_z;}
+\DoxyCodeLine{178     \};}
+\DoxyCodeLine{179 \};}
+\DoxyCodeLine{180 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//MPU6050\_H}}
+
+\end{DoxyCode}

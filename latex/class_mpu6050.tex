@@ -1,0 +1,62 @@
+\hypertarget{class_mpu6050}{}\doxysection{Mpu6050 Class Reference}
+\label{class_mpu6050}\index{Mpu6050@{Mpu6050}}
+
+
+The main class, it is used to read the MPU6050 Accelerometer, Gyroscope and thermometer.  
+
+
+
+
+{\ttfamily \#include $<$MPU.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mpu6050_a7e9c673e4e45d108735cf354cb60811d}\label{class_mpu6050_a7e9c673e4e45d108735cf354cb60811d}} 
+{\bfseries Mpu6050} (hwlib\+::i2c\+\_\+bus \&bus)
+\item 
+void \mbox{\hyperlink{class_mpu6050_adb5debbfea5cb00aab9e1f6aae3ffbef}{startup}} ()
+\item 
+\mbox{\Hypertarget{class_mpu6050_a1a6e1731847584b8136be033bfeae8ca}\label{class_mpu6050_a1a6e1731847584b8136be033bfeae8ca}} 
+int16\+\_\+t {\bfseries get\+Temp} ()
+\begin{DoxyCompactList}\small\item\em The get Temp Function reads the temperature read by the MPU6050 and returns the value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_mpu6050_ad89ea5c7f3c895d6022acccaa1718eb1}\label{class_mpu6050_ad89ea5c7f3c895d6022acccaa1718eb1}} 
+int16\+\_\+t {\bfseries get\+AccX} ()
+\begin{DoxyCompactList}\small\item\em The Get\+AccX reads the X value of the Accelerometer and returns the value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_mpu6050_a9c2d3c3e830296ce76985efb3e8dea49}\label{class_mpu6050_a9c2d3c3e830296ce76985efb3e8dea49}} 
+int16\+\_\+t {\bfseries get\+AccY} ()
+\begin{DoxyCompactList}\small\item\em The Get\+AccY reads the Y value of the Accelerometer and returns the value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_mpu6050_af63c07e92a289d3a06739785371b3257}\label{class_mpu6050_af63c07e92a289d3a06739785371b3257}} 
+int16\+\_\+t {\bfseries get\+AccZ} ()
+\begin{DoxyCompactList}\small\item\em The Get\+AccZ reads the Z value of the Accelerometer and returns the value. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{class_mpu6050_a2aedc4a704c79d20b3175298ad1bb838}{get\+GyroX}} ()
+\item 
+\mbox{\Hypertarget{class_mpu6050_aad125508badfb10e0fa30dcbfcaccb49}\label{class_mpu6050_aad125508badfb10e0fa30dcbfcaccb49}} 
+int16\+\_\+t {\bfseries get\+GyroY} ()
+\begin{DoxyCompactList}\small\item\em The Get\+GyroY reads the Y value of the Accelerometer and returns the value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_mpu6050_ab1877b254f3395aaa93534f5d5e2c1fb}\label{class_mpu6050_ab1877b254f3395aaa93534f5d5e2c1fb}} 
+int16\+\_\+t {\bfseries get\+GyroZ} ()
+\begin{DoxyCompactList}\small\item\em The Get\+GyroZ reads the Z value of the Accelerometer and returns the value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main class, it is used to read the MPU6050 Accelerometer, Gyroscope and thermometer. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mpu6050_a2aedc4a704c79d20b3175298ad1bb838}\label{class_mpu6050_a2aedc4a704c79d20b3175298ad1bb838}} 
+\index{Mpu6050@{Mpu6050}!getGyroX@{getGyroX}}
+\index{getGyroX@{getGyroX}!Mpu6050@{Mpu6050}}
+\doxysubsubsection{\texorpdfstring{getGyroX()}{getGyroX()}}
+{\footnotesize\ttfamily int16\+\_\+t Mpu6050\+::get\+GyroX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+GYROSCOPE /////////////////////////////// The Get\+GyroX reads the X value of the Accelerometer and returns the value. \mbox{\Hypertarget{class_mpu6050_adb5debbfea5cb00aab9e1f6aae3ffbef}\label{class_mpu6050_adb5debbfea5cb00aab9e1f6aae3ffbef}} 
+\index{Mpu6050@{Mpu6050}!startup@{startup}}
+\index{startup@{startup}!Mpu6050@{Mpu6050}}
+\doxysubsubsection{\texorpdfstring{startup()}{startup()}}
+{\footnotesize\ttfamily void Mpu6050\+::startup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+The startup Function is used to set the correct values to the power registers, without this the chip will remain in sleep mode and not give any values. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_m_p_u_8h}{MPU.\+h}}\end{DoxyCompactItemize}
